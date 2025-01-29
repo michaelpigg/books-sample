@@ -19,6 +19,7 @@ public class CassandraConnectionManager implements Resource {
         log.info("Closing Cassandra connection before checkpoint");
         System.out.println("Closing Cassandra connection before checkpoint");
         connector.close();
+        Thread.sleep(1000);
     }
 
     @Override

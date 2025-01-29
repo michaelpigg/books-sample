@@ -1,0 +1,8 @@
+CREATE KEYSPACE bookstore WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+USE bookstore;
+
+CREATE TABLE books (
+    id UUID PRIMARY KEY,
+    title TEXT,
+    author TEXT
+);

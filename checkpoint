@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+jcmd $1 JDK.checkpoint
