@@ -2,11 +2,14 @@ package com.highlylogical;
 
 import com.datastax.oss.driver.api.core.CqlSession;
 import java.net.InetSocketAddress;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CassandraConnector {
-    private CqlSession session;
-    private String[] contactPoints;
-    private String keyspace;
+    private static final Logger log = LoggerFactory.getLogger(CassandraConnector.class);
+    private static CqlSession session;
+    private final String[] contactPoints;
+    private final String keyspace;
 
     public CassandraConnector(String[] contactPoints, String keyspace) {
         this.contactPoints = contactPoints;
@@ -25,12 +28,18 @@ public class CassandraConnector {
                     .withKeyspace(keyspace)
                     .withLocalDatacenter("datacenter1") // Adjust for your setup
                     .build();
-            session.isClosed();
+	    log.info("Built new  cassandra session " + session);
+            System.out.println("Built new cassandra session " + session); 
         }
         return session;
     }
 
     public void close() {
-        if (session != null) session.close();
+        if (session != null){
+	       	session.close();
+		log.info("Closed cassandra session " + session);
+		System.out.println("Closed cassandra session " + session);
+		session = null;
+	}
     }
 }

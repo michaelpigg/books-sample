@@ -25,6 +25,6 @@ public class CassandraConnectionManager implements Resource {
     public void afterRestore(Context<? extends Resource> context) throws Exception {
         log.info("Restore Cassandra connection after checkpoint");
         System.out.println("Restore Cassandra connection after checkpoint");
-        connector.connect();
+        //connector.connect();
     }
 }

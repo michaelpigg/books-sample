@@ -3,10 +3,12 @@ package com.highlylogical;
 import io.javalin.Javalin;
 import org.crac.Context;
 import org.crac.Resource;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class ApiServer implements Resource {
+    public static final Logger log = LoggerFactory.getLogger(ApiServer.class);
     private final BookService bookService;
     private Javalin app;
     public ApiServer(BookService bookService) {
@@ -15,11 +17,13 @@ public class ApiServer implements Resource {
 
     @Override
     public void beforeCheckpoint(Context<? extends Resource> context) throws Exception {
+	log.info("Stopping Javalin server before checkpoint");
         this.stop();
     }
 
     @Override
     public void afterRestore(Context<? extends Resource> context) throws Exception {
+	log.info("Starting Javalin server after checkpoint");
         this.start();
     }
 
