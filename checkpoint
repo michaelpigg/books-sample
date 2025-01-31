@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-jcmd $1 JDK.checkpoint
+pid=$(jcmd | grep all.jar | grep -o "^[0-9]*")
+jcmd $pid JDK.checkpoint
