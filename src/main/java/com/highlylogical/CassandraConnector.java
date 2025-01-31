@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.time.ZonedDateTime;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
@@ -89,6 +90,8 @@ public class CassandraConnector implements Resource {
         openLogFile();
         writeLogFile("CassandraConnector after restore");
         log.info("Cassandra connector restore after checkpoint");
-        connect();
+        CompletableFuture.runAsync(() -> {
+            connect();
+        });
     }
 }
